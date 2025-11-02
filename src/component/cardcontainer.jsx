@@ -21,13 +21,19 @@ const itemlist=[{
     price:2,
     img:"https://cdn-icons-png.flaticon.com/128/2015/2015014.png"
 }]
-function Cardcontainer(){
+function Cardcontainer({settotalCount}){
     const [list,setlist]=useState(itemlist);
+    const [counts,setCounts]=useState({});
     const deletecart=(id)=>{
         const updatedlist=list.filter((item)=>item.id!=id);
         setlist(updatedlist)
     }
-    const [totalcount,settotalcount]=useState(0);
+    const handlecountchange=(id,newcount)=>{
+        const updatedcounts={...counts,[id]:newcount};
+        setCounts(updatedcounts);
+        const totalcount= Object.values(updatedcounts).reduce((sum,c)=>sum+c,0);
+        settotalCount(totalcount)
+    }
     return (
         <div>
             {list.map((object)=>{
@@ -35,7 +41,8 @@ function Cardcontainer(){
                            object={object} 
                            key={object.id}
                            deletecart={deletecart}
-                           count={count}
+                           parentcount={counts[object.id]||0}
+                           oncountchange={handlecountchange}
                        />
                 })}
         </div>

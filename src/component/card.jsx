@@ -1,9 +1,14 @@
 import './Style.css'
-import { useState } from 'react';
-function Card(props,{count}){
+import { useEffect, useState } from 'react';
+function Card(props){
     const {title,description,img,price,id}=props.object
-    const {deletecart}=props;
-    const [count,setCount] =useState(0);
+    const {deletecart,oncountchange,parentcount}=props;
+    const [count,setcount]=useState(parentcount);
+
+    useEffect(()=>{
+        oncountchange(id,count)
+    },[count])
+
     return (
         <div className="whole">
             <div className="left">
@@ -22,8 +27,8 @@ function Card(props,{count}){
                     </div>
                 </div>
                 <div className="button">
-                    <button onClick={()=>{setCount(count+1)}}>add</button>
-                    <button onClick={()=>{setCount(prevcount=>prevcount==0? 0:prevcount-1)}}>sub</button>
+                    <button onClick={()=>{setcount(count+1)}}>add</button>
+                    <button onClick={()=>{setcount(prevcount=>prevcount==0? 0:prevcount-1)}}>sub</button>
                     <button onClick={()=>{deletecart(id)}}>delete</button>
                 </div>
             </div>
