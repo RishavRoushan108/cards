@@ -5,10 +5,11 @@ import { useState } from 'react'
 
 function App() {
   const [totalcount,settotalCount]=useState(0);
+  const [totalprice,settotalprice]=useState(0);
   return (
     <div>
-      <Header totalcount={totalcount}/>
-      <Cardcontainer settotalCount={settotalCount}/>
+      <Header totalcount={totalcount} totalprice={totalprice}/>
+      <Cardcontainer settotalCount={settotalCount} settotalprice={settotalprice}/>
     </div>
   )
 }

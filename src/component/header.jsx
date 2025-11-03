@@ -1,4 +1,4 @@
-function Header({totalcount}){
+function Header({totalcount,totalprice}){
     const style={
         Image:{
             height:"100px",
@@ -30,6 +30,9 @@ function Header({totalcount}){
             <div>
                 <img style={style.Cart}  src="https://cdn-icons-png.flaticon.com/128/3514/3514491.png" alt="not found" />
                 <div style={style.Count}>{totalcount}</div>
+            </div>
+            <div>
+                <h2>total:{totalprice}</h2>
             </div>
         </div>
     )

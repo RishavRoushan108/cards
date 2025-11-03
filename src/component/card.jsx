@@ -2,13 +2,19 @@ import './Style.css'
 import { useEffect, useState } from 'react';
 function Card(props){
     const {title,description,img,price,id}=props.object
-    const {deletecart,oncountchange,parentcount}=props;
+    const {deletecart,oncountchange,parentcount,parentprice,onpricechange}=props;
     const [count,setcount]=useState(parentcount);
-
+    const [cardprice,setcardprice]=useState(parentprice)
     useEffect(()=>{
         oncountchange(id,count)
     },[count])
 
+    useEffect(()=>{
+        onpricechange(id,cardprice)
+    },[cardprice])
+    useEffect(()=>{
+        setcardprice(count*price)
+    },[count])
     return (
         <div className="whole">
             <div className="left">
@@ -23,7 +29,7 @@ function Card(props){
                     <div className='price'>
                         <h3>price:{price} Rs</h3>
                         <h3>qty:{count}</h3>
-                        <h3>total:{price*count}</h3>
+                        <h3>total:{cardprice}</h3>
                     </div>
                 </div>
                 <div className="button">
